@@ -109,10 +109,24 @@
 
       <article class="proj">
         <div class="proj-head">
+          <h3>nanokern · 微内核 OS</h3>
+          <span class="stack">C · MIPS Assembly</span>
+        </div>
+        <p>从零构建的 <strong>MIPS R3000 微内核操作系统</strong>,约 11K 行 C/汇编,覆盖内核到用户态的完整链路。</p>
+        <ul class="bullets">
+          <li>两级页表 + 软件 TLB 的内存管理,<strong>写时复制 fork</strong></li>
+          <li>进程调度、IPC 进程间通信、用户态文件系统</li>
+          <li>交互式 Shell,打通系统调用全流程</li>
+        </ul>
+        <div class="proj-links"><a href="https://github.com/WhiteJonas/nanokern" target="_blank" rel="noopener">Code →</a></div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-head">
           <h3>五级流水线 CPU</h3>
           <span class="stack">Verilog HDL</span>
         </div>
-        <p>从零实现五级流水线 MIPS 处理器，基于 <strong>AT 定时模型</strong>统一处理数据/控制冒险，实现前递与暂停。</p>
+        <p>从零实现五级流水线 MIPS 处理器,基于 <strong>AT 定时模型</strong>统一处理数据/控制冒险,实现前递与暂停。</p>
         <ul class="bullets">
           <li>深入理解流水线吞吐、访存瓶颈与硬件执行模型</li>
           <li>分析 LLM 推理 GPU 利用率的底层认知</li>
@@ -125,7 +139,8 @@
           <h3>SysY→MIPS 编译器</h3>
           <span class="stack">Java</span>
         </div>
-        <p>完整编译器 + 基于 <strong>SSA</strong> 的优化（支配树、支配边界、φ 插入、死代码消除），与计算图优化方向相通。</p>
+        <p>完整编译器,涵盖词法/语法分析、错误处理、代码生成与中间代码优化;自设计 PCode 指令集并实现虚拟机解释执行。</p>
+        <div class="proj-links"><a href="https://github.com/WhiteJonas/compiler-sysy" target="_blank" rel="noopener">Code →</a></div>
       </article>
 
       <!-- 团队项目：乐词不疲 -->
@@ -151,10 +166,28 @@
 
       <article class="proj">
         <div class="proj-head">
-          <h3>PINN 求解 PDE</h3>
-          <span class="stack">JAX · XLA</span>
+          <h3>AI for Science 评测平台</h3>
+          <span class="stack">JAX · PyTorch · Django</span>
         </div>
-        <p>本科毕设：基于 <strong>JAX</strong> 的物理信息神经网络，运用自动微分、向量化与 XLA 编译；搭建 GPU 性能剖析工具链。</p>
+        <p>科学计算模型的<strong>全栈评测平台</strong>:用 JAX/PyTorch 实现 PINN、DGM、ML-CFD 等求解器,配套<strong>毫秒级 GPU 性能剖析</strong>工具链与在线评测系统。</p>
+        <ul class="bullets">
+          <li>PINN 求解 PDE:自动微分 + 向量化 + XLA 编译</li>
+          <li>性能剖析:任务调度 → 指标采集 → 可视化 → 排行榜</li>
+        </ul>
+        <div class="proj-links"><a href="https://github.com/WhiteJonas/sci-ml-benchmark-platform" target="_blank" rel="noopener">Code →</a></div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-head">
+          <h3>论文阅读笔记</h3>
+          <span class="stack">LLM · Agent Serving</span>
+        </div>
+        <p>LLM/Agent 推理优化方向的<strong>论文精读笔记与讲解</strong>,持续追踪顶会进展。</p>
+        <ul class="bullets">
+          <li>注意力算子、推测解码、推理调度</li>
+          <li>Agent serving 与性能评测基准</li>
+        </ul>
+        <div class="proj-links"><a href="https://github.com/WhiteJonas/paper-reading-notes" target="_blank" rel="noopener">Code →</a></div>
       </article>
 
     </div>
