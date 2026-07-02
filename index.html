@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>徐凯威 Kaiwei Xu · LLM 推理系统</title>
+<meta name="description" content="徐凯威 (Kaiwei Xu) — 北航研究生，方向：大模型推理系统与请求调度。nano-vllm / 流水线 CPU / 编译器。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 背景装饰光斑 -->
+<div class="bg-orbs" aria-hidden="true">
+  <span class="orb orb-1"></span>
+  <span class="orb orb-2"></span>
+  <span class="orb orb-3"></span>
+</div>
+
+<!-- ============ 固定导航 ============ -->
+<nav class="topnav" id="topnav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">Kaiwei&nbsp;Xu</a>
+    <div class="nav-links">
+      <a href="#about">关于</a>
+      <a href="#research">研究</a>
+      <a href="#projects">项目</a>
+      <a href="#skills">技能</a>
+      <a href="https://github.com/WhiteJonas" target="_blank" rel="noopener" class="nav-cta">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
+
+  <!-- ============ Hero ============ -->
+  <header class="hero reveal">
+    <h1>你好，我是 <span class="grad">徐凯威</span></h1>
+    <p class="subtitle">Kaiwei Xu · 大模型推理系统 &amp; 请求调度</p>
+    <p class="badge">🎓 北京航空航天大学 · Beihang University (BUAA)</p>
+    <p class="intro">
+      北京航空航天大学研究生，专注<strong>大模型推理服务系统</strong>。
+      研究方向是<strong>基于输出长度预测的请求调度</strong>，
+      喜欢从硬件到系统自底向上地把问题想透。
+    </p>
+    <div class="cta-row">
+      <a href="#projects" class="btn btn-primary">查看项目</a>
+      <a href="mailto:zy2506427@buaa.edu.cn" class="btn btn-ghost">联系我</a>
+      <a href="https://github.com/WhiteJonas" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+    </div>
+  </header>
+
+  <!-- ============ About ============ -->
+  <section id="about" class="reveal">
+    <h2>关于我 <span class="en">About</span></h2>
+    <p>
+      我喜欢从硬件到系统自底向上地把问题想透——从手写 Verilog 流水线 CPU、
+      到复现 vLLM 的分页注意力与连续批调度，
+      再到当前的研究：<strong>用输出长度预测优化请求调度</strong>。
+    </p>
+    <ul class="timeline">
+      <li><span class="when">研究生 · 在读</span><span class="what">北京航空航天大学 · 计算机技术 — 大模型推理系统与调度</span></li>
+      <li><span class="when">本科</span><span class="what">北京航空航天大学 · 计算机科学与技术</span></li>
+    </ul>
+  </section>
+
+  <!-- ============ 研究方向 ============ -->
+  <section id="research" class="reveal">
+    <h2>研究方向 <span class="en">Research</span></h2>
+    <p>
+      大模型推理服务面临一个核心矛盾：请求的输出长度事先未知，而调度器却要在
+      <strong>连续批处理</strong>（continuous batching）中决定组批与优先级。
+      短请求排在长请求后面会造成<strong>队头阻塞</strong>，尾延迟因此恶化。
+    </p>
+    <p>
+      我的研究通过<strong>预测请求的输出长度</strong>，让调度器提前做出更优决策——
+      降低 TTFT / TPOT、提升 <strong>Goodput</strong> 并满足 SLO。
+      场景进一步延伸到<strong>多智能体（Agent）</strong>协作下的推理负载特征分析。
+    </p>
+    <ul class="kw">
+      <li>vLLM / PagedAttention</li>
+      <li>Continuous Batching</li>
+      <li>Output-length Prediction</li>
+      <li>TTFT · TPOT · Goodput · SLO</li>
+      <li>Multi-Agent Serving</li>
+    </ul>
+  </section>
+
+  <!-- ============ 项目 ============ -->
+  <section id="projects" class="reveal">
+    <h2>项目 <span class="en">Projects</span></h2>
+    <div class="proj-grid">
+
+      <article class="proj">
+        <div class="proj-head">
+          <h3>nano-vllm</h3>
+          <span class="stack">Python · PyTorch · CUDA</span>
+        </div>
+        <p>
+          从零实现的轻量 LLM 推理引擎，复现 vLLM 核心机制：
+          <strong>PagedAttention</strong>、<strong>前缀缓存</strong>与<strong>连续批调度</strong>。
+        </p>
+        <ul class="bullets">
+          <li>连续批相比逐条推理吞吐提升约 <strong>17×</strong></li>
+          <li>前缀缓存命中数与理论值精确吻合，逐 token 对齐 HuggingFace</li>
+          <li>修复缓存命中时 attention mask 错位的隐蔽 bug</li>
+        </ul>
+        <div class="proj-links"><a href="https://github.com/WhiteJonas/nano-vllm" target="_blank" rel="noopener">Code →</a></div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-head">
+          <h3>五级流水线 CPU</h3>
+          <span class="stack">Verilog HDL</span>
+        </div>
+        <p>从零实现五级流水线 MIPS 处理器，基于 <strong>AT 定时模型</strong>统一处理数据/控制冒险，实现前递与暂停。</p>
+        <ul class="bullets">
+          <li>深入理解流水线吞吐、访存瓶颈与硬件执行模型</li>
+          <li>分析 LLM 推理 GPU 利用率的底层认知</li>
+        </ul>
+        <div class="proj-links"><a href="https://github.com/WhiteJonas/mips-pipeline-cpu" target="_blank" rel="noopener">Code →</a></div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-head">
+          <h3>SysY→MIPS 编译器</h3>
+          <span class="stack">Java</span>
+        </div>
+        <p>完整编译器 + 基于 <strong>SSA</strong> 的优化（支配树、支配边界、φ 插入、死代码消除），与计算图优化方向相通。</p>
+      </article>
+
+      <!-- 团队项目：乐词不疲 -->
+      <article class="proj">
+        <div class="proj-head">
+          <h3>乐词不疲 · 游戏化背单词</h3>
+          <span class="team-tag">团队 · 8 人</span>
+        </div>
+        <p class="stack" style="background:none;padding:0;">Django · MySQL · RESTful API</p>
+        <p>软件工程课团队项目：一款<strong>游戏化背单词 Web 应用</strong>，用抽卡、单词填空「贪吃蛇」小游戏 + 成就/排行榜激励学习。Scrum 敏捷开发，GitLab 规范化协作（分支 / PR / issue），Apifox 管理接口文档。</p>
+        <p class="contrib">作为 <strong>3 人后端</strong>成员之一，基于 Django 设计并实现多组 RESTful API——涵盖学习计划与复习队列、打卡与数据统计、抽卡事件、成就与排行榜等模块，并完成接口测试与联调。</p>
+      </article>
+
+      <article class="proj">
+        <div class="proj-head">
+          <h3>PINN 求解 PDE</h3>
+          <span class="stack">JAX · XLA</span>
+        </div>
+        <p>本科毕设：基于 <strong>JAX</strong> 的物理信息神经网络，运用自动微分、向量化与 XLA 编译；搭建 GPU 性能剖析工具链。</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ 技能 ============ -->
+  <section id="skills" class="reveal">
+    <h2>技能 <span class="en">Skills</span></h2>
+    <div class="skill-grid">
+      <div class="skill-card">
+        <h4>推理系统 / Serving</h4>
+        <p>vLLM · PagedAttention · 连续批调度 · 前缀缓存 · KV Cache</p>
+      </div>
+      <div class="skill-card">
+        <h4>GPU / 性能</h4>
+        <p>CUDA · GPU 性能剖析 · roofline 分析 · 显存/利用率监控</p>
+      </div>
+      <div class="skill-card">
+        <h4>语言 / Languages</h4>
+        <p>Python · C/C++ · Java · Verilog</p>
+      </div>
+      <div class="skill-card">
+        <h4>框架 / Frameworks</h4>
+        <p>PyTorch · JAX / XLA · Transformers</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="reveal">
+    <p class="foot-cta">对我的方向感兴趣？欢迎联系 👋</p>
+    <div class="foot-links">
+      <a href="mailto:zy2506427@buaa.edu.cn">zy2506427@buaa.edu.cn</a>
+      <a href="https://github.com/WhiteJonas" target="_blank" rel="noopener">github.com/WhiteJonas</a>
+    </div>
+    <p class="tiny">© 2026 徐凯威 Kaiwei Xu · Hosted on GitHub Pages</p>
+  </footer>
+
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
